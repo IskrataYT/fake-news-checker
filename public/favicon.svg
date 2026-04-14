@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="lensRing" x1="17" y1="16" x2="45" y2="44" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1FBF9F" />
+      <stop offset="1" stop-color="#1D4ED8" />
+    </linearGradient>
+    <linearGradient id="lensBeam" x1="39" y1="39" x2="53" y2="53" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F59E0B" />
+      <stop offset="1" stop-color="#1D4ED8" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="18" fill="#08111F" />
+  <circle cx="29.5" cy="29.5" r="13.5" stroke="url(#lensRing)" stroke-width="6" />
+  <circle cx="29.5" cy="29.5" r="4" fill="#FFFDF8" />
+  <path d="M39.5 39.5 51.5 51.5" stroke="url(#lensBeam)" stroke-linecap="round" stroke-width="6" />
+  <path
+    d="M18 17.5c4.4-4 12.1-5.9 18.7-2.7"
+    stroke="url(#lensBeam)"
+    stroke-linecap="round"
+    stroke-width="4"
+  />
+</svg>
