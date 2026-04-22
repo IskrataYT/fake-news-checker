@@ -59,22 +59,11 @@ body {
   font: 400 16px/1.68 var(--font-body);
   color: var(--ink);
   background:
-    radial-gradient(circle at top, rgba(95, 130, 255, 0.12), transparent 24rem),
-    radial-gradient(circle at 82% 12%, rgba(40, 199, 177, 0.08), transparent 20rem),
     linear-gradient(180deg, var(--page) 0%, var(--page-deep) 100%);
+
 }
 
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.032) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.032) 1px, transparent 1px);
-  background-size: 96px 96px;
-  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.22), transparent 78%);
-}
+
 
 a {
   color: inherit;
@@ -137,10 +126,12 @@ ul {
 }
 
 .site-header {
-  position: sticky;
+
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 30;
-  padding: 0.7rem 0 0;
+  padding: 0.7rem 0;
 }
 
 .site-header__inner {
@@ -150,11 +141,11 @@ ul {
   align-items: center;
   gap: 0.9rem;
   padding: 0.72rem 0.9rem;
-  border: 1px solid var(--line);
+  border: none;
   border-radius: 24px;
-  background: var(--surface-frost);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
-  backdrop-filter: blur(22px);
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
 }
 
 .brand {
@@ -309,36 +300,9 @@ ul {
   grid-template-columns: minmax(0, 1.42fr) minmax(340px, 470px);
   gap: clamp(1.6rem, 3vw, 3.4rem);
   padding: clamp(2rem, 3vw, 4rem);
-  border-radius: var(--radius-xl);
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  background:
-    radial-gradient(circle at 18% 18%, rgba(40, 199, 177, 0.12), transparent 18rem),
-    radial-gradient(circle at 92% 20%, rgba(95, 130, 255, 0.18), transparent 22rem),
-    linear-gradient(135deg, #0b121e 0%, #101a2a 38%, #0d1522 100%);
-  box-shadow: 0 36px 96px rgba(0, 0, 0, 0.34);
   overflow: hidden;
 }
 
-.hero__panel::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
-  background-size: 120px 120px;
-  opacity: 0.04;
-  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.9), transparent 86%);
-}
-
-.hero__panel::after {
-  content: '';
-  position: absolute;
-  inset: 1.15rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: calc(var(--radius-xl) - 10px);
-  pointer-events: none;
-}
 
 .hero-copy,
 .hero-visual {
@@ -384,8 +348,13 @@ ul {
   margin-top: 1.15rem;
   font: 800 clamp(2.95rem, 5.35vw, 5rem) / 0.95 var(--font-display);
   letter-spacing: -0.06em;
-  color: var(--ink);
   max-width: 13.2ch;
+   background: -webkit-linear-gradient(#ffffff, #87abf7);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding-bottom: 1.5rem;
+  margin-bottom: .5rem;
 }
 
 .hero-lede {
@@ -559,6 +528,57 @@ ul {
   align-items: center;
   justify-content: flex-start;
   animation: rise-in 940ms var(--ease-out) 80ms both;
+  position: relative;
+  overflow: visible;
+}
+
+.hero-visual__decoration {
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-visual__decoration--top-left {
+  top: -45px;
+  left: -45px;
+  opacity: 1;
+  border-top-left-radius: 25%;
+  background-image: radial-gradient(#ffffff 1.3px, #ffffff00 1.3px);
+  background-size: 13px 13px;
+  mask-image: radial-gradient(white, transparent 80%);
+    /* --- Add these lines --- */
+  -webkit-mask-image: 
+    linear-gradient(to left, transparent, black 15%, black 85%, transparent),
+    linear-gradient(to top, transparent, black 15%, black 85%, transparent);
+  mask-image: 
+    linear-gradient(to left, transparent, black 15%, black 85%, transparent),
+    linear-gradient(to top, transparent, black 15%, black 85%, transparent);
+    
+  /* This ensures both gradients are applied simultaneously */
+  -webkit-mask-composite: source-in; 
+  mask-composite: intersect; 
+}
+
+.hero-visual__decoration--bottom-right {
+  bottom: -50px;
+  right: -50px;
+  opacity: 1;
+  border-bottom-right-radius: 25%;
+  background-image: radial-gradient(#ffffff 1px, #ffffff00 1.3px);
+  background-size: 13px 13px;
+  /* --- Add these lines --- */
+  -webkit-mask-image: 
+    linear-gradient(to right, transparent, black 15%, black 85%, transparent),
+    linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+  mask-image: 
+    linear-gradient(to right, transparent, black 15%, black 85%, transparent),
+    linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+    
+  /* This ensures both gradients are applied simultaneously */
+  -webkit-mask-composite: source-in; 
+  mask-composite: intersect; 
 }
 
 .hero-signal {
@@ -577,13 +597,13 @@ ul {
   height: 21rem;
   border-radius: 50%;
   background:
-    radial-gradient(circle, rgba(0, 158, 255, 0.18) 0%, rgba(0, 158, 255, 0.04) 46%, transparent 72%);
+    radial-gradient(circle, rgba(0, 158, 255, 0.18) 0%, rgba(0, 158, 255, 0.04) 46%);
   filter: blur(14px);
 }
 
 .hero-signal__panel {
   position: relative;
-  z-index: 1;
+  z-index: 10;
   width: min(100%, 29.5rem);
   padding: 1.45rem;
   display: grid;
@@ -592,10 +612,49 @@ ul {
   border: 1px solid rgba(255, 255, 255, 0.08);
   background:
     radial-gradient(circle at 18% 18%, rgba(0, 158, 255, 0.08), transparent 12rem),
-    linear-gradient(180deg, rgba(17, 28, 43, 0.96) 0%, rgba(11, 20, 32, 0.98) 100%);
+    linear-gradient(180deg, rgb(17, 28, 43) 0%, rgba(11, 20, 32, 0.98) 100%);
   box-shadow:
     0 24px 44px rgba(0, 0, 0, 0.24),
     inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+/* --- Top Left Corner --- */
+.hero-signal__panel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 250px;  /* Controls how far the border extends */
+  height: 250px; 
+ background: conic-gradient(from 180deg, rgba(255,255,255,0) 0%, #ffffff 38%, rgba(255,255,255,0) 90%);
+ z-index: -1;
+ visibility: hidden;
+
+}
+
+/* --- Bottom Right Corner --- */
+.hero-signal__panel::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 250px;
+  height: 250px;
+  pointer-events: none;
+
+  /* 
+     1. Bottom border: fades from Right (solid) to Left (transparent)
+     2. Right border: fades from Bottom (solid) to Top (transparent)
+  */
+  background-image: 
+    linear-gradient(to left, #ffffff 0%, #ffffff00 100%),  /* Bottom Line */
+    linear-gradient(to top, #ffffff 0%, #ffffff00 100%);   /* Right Line */
+
+  background-size: 250px 2px, 2px 250px;
+  background-position: bottom right, bottom right;
+  background-repeat: no-repeat;
+  z-index: -1;
+   visibility: hidden;
 }
 
 .hero-signal__headline {
@@ -743,41 +802,43 @@ ul {
 }
 
 .proof-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.proof-card,
-.workflow-card,
-.capability-card,
-.closing__frame,
-.closing__panel article {
-  border: 1px solid var(--line);
-  background: linear-gradient(180deg, rgba(18, 27, 40, 0.94) 0%, rgba(12, 18, 29, 0.94) 100%);
-  box-shadow: var(--shadow-sm);
-}
-
-.proof-card,
-.workflow-card,
-.capability-card {
-  position: relative;
-  border-radius: var(--radius-md);
-  transition:
-    transform var(--duration-base) var(--ease-out),
-    box-shadow var(--duration-base) var(--ease-out),
-    border-color var(--duration-fast) var(--ease-out);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 2.15rem;
 }
 
 .proof-card {
   padding: 1.45rem;
+  border-radius: 20px;
+  border: 1px solid var(--line);
+  background: linear-gradient(135deg, rgba(95, 130, 255, 0.08), rgba(40, 199, 177, 0.06));
+  box-shadow: var(--shadow-sm);
   animation: rise-in 780ms var(--ease-out) both;
 }
 
+.proof-card:nth-child(1) {
+  grid-column: 1;
+  grid-row: 1;
+  animation-delay: 0ms;
+}
+
 .proof-card:nth-child(2) {
+  grid-column: span 2;
+  grid-row: 1;
   animation-delay: 90ms;
 }
 
 .proof-card:nth-child(3) {
+  grid-column: span 2;
+  grid-row: 2;
   animation-delay: 160ms;
+}
+
+.proof-card:nth-child(4) {
+  grid-column: 3;
+  grid-row: 2;
+  animation-delay: 210ms;
 }
 
 .proof-card__badge {
@@ -809,6 +870,10 @@ ul {
 
 .workflow-card {
   padding: 1.55rem;
+  border-radius: 20px;
+  border: 1px solid var(--line);
+  background: linear-gradient(135deg, rgba(95, 130, 255, 0.08), rgba(40, 199, 177, 0.06));
+  box-shadow: var(--shadow-sm);
   animation: rise-in 820ms var(--ease-out) both;
 }
 
@@ -846,6 +911,10 @@ ul {
 
 .capability-card {
   padding: 1.55rem;
+  border-radius: 20px;
+  border: 1px solid var(--line);
+  background: linear-gradient(135deg, rgba(95, 130, 255, 0.08), rgba(40, 199, 177, 0.06));
+  box-shadow: var(--shadow-sm);
   min-height: 100%;
   animation: rise-in 820ms var(--ease-out) both;
 }
@@ -1059,44 +1128,6 @@ ul {
 }
 
 @media (max-width: 1024px) {
-  .site-header__inner {
-    flex-wrap: wrap;
-  }
-
-  .site-nav {
-    order: 3;
-    width: 100%;
-    justify-content: flex-start;
-    overflow-x: auto;
-    padding-bottom: 0.2rem;
-  }
-
-  .header-cta {
-    margin-left: auto;
-  }
-
-  .capabilities-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 720px) {
-  .proof-grid,
-  .workflow-grid,
-  .capabilities-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .brand-lockup span:last-child {
-    white-space: normal;
-  }
-}
-
-@media (max-width: 640px) {
-  html {
-    scroll-padding-top: 9rem;
-  }
-
   .site-header {
     padding-top: 0.75rem;
   }

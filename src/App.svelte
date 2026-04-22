@@ -86,21 +86,27 @@
   const proofItems = [
     {
       badge: '3 нива на проверка',
-      title: 'Структура, източници и качество на твърдението в един преглед',
+      title: 'Бързо потвърждение на факти и новини',
       description:
-        'Verity Lens преглежда самата статия, цитираните доказателства и начина, по който е рамкирано твърдението, преди да подаде предупредителен сигнал.',
+        'Verity Lens спестява време на потрбителите като дава оценка на дадена новина само за секунди. Чете цялата статия и анализира без да има нужда вие да се трудите.',
     },
     {
       badge: '<5 сек. преглед',
-      title: 'Достатъчно бързо за таба, който вече е отворен',
+      title: 'Предотвратява споделянето на погрешна информация',
       description:
-        'Първият прочит е създаден за бързи новинарски моменти, така че съмнението да се появи преди социалното потвърждение да надделее.',
+        'С Verity Lens можете бързо да прецените дали дадена статия заслужава доверие, преди да я споделите или обсъдите с други.',
     },
     {
       badge: '1 клик до източника',
-      title: 'Всяко предупреждение сочи към нещо конкретно',
+      title: 'Лесно за използване',
       description:
-        'Вместо неясни оценки, разширението показва кой източник е слаб, липсва, повтаря се или е използван извън реалния му контекст.',
+        'Verity Lens се интегрира безпроблемно в браузъра ви, предоставяйки сигнали и контекст точно когато ви трябват, без да прекъсва потока на четене.',
+    },
+    {
+      badge: 'Безплатно и достъпно',
+      title: 'Отворен код и лесна инсталация',
+      description:
+        'Verity Lens е безплатно разширение, достъпно за всички, с отворен код за прозрачност и подобрения от общността.',
     },
   ]
 
@@ -213,10 +219,6 @@
     <section class="hero section" id="top">
       <div class="hero__panel">
         <div class="hero-copy">
-          <div class="eyebrow">
-            <span class="eyebrow__dot"></span>
-            Разширение за Chrome за проверка на факти
-          </div>
           <h1>Проверете фактите, преди да повярвате.</h1>
           <p class="hero-lede">
             Verity Lens е разширение за Chrome, което проверява източници, открива
@@ -267,6 +269,9 @@
         </div>
 
         <div class="hero-visual" aria-hidden="true">
+          <div class="hero-visual__decoration hero-visual__decoration--top-left"></div>
+          <div class="hero-visual__decoration hero-visual__decoration--bottom-right"></div>
+          
           <div class="hero-signal">
             <div class="hero-signal__glow"></div>
             <div class="hero-signal__panel">
@@ -307,18 +312,12 @@
 
     <section class="proof section" aria-labelledby="proof-heading">
       <div class="section-heading">
-        <p class="section-kicker">Процес, а не шум</p>
-        <h2 id="proof-heading">Създаден да показва как мисли разширението, а не да симулира сигурност.</h2>
-        <p>
-          Всеки доказателствен елемент е формулиран като продуктова способност, а не като
-          измислена популярност, така че страницата да изглежда достоверна още преди
-          разширението да е живо.
-        </p>
+        <h2 id="proof-heading">Verity Lens - Верен помощник в ежедневието</h2>
       </div>
 
       <div class="proof-grid">
-        {#each proofItems as item}
-          <article class="proof-card">
+        {#each proofItems as item, index}
+          <article class="proof-card" class:span-two={index === 0}>
             <p class="proof-card__badge">{item.badge}</p>
             <h3>{item.title}</h3>
             <p>{item.description}</p>
