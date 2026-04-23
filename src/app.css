@@ -603,7 +603,6 @@ ul {
 
 .hero-signal__panel {
   position: relative;
-  z-index: 10;
   width: min(100%, 29.5rem);
   padding: 1.45rem;
   display: grid;
@@ -618,44 +617,35 @@ ul {
     inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
-/* --- Top Left Corner --- */
-.hero-signal__panel::before {
-  content: "";
+.hero-signal__decoration{
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 250px;  /* Controls how far the border extends */
-  height: 250px; 
- background: conic-gradient(from 180deg, rgba(255,255,255,0) 0%, #ffffff 38%, rgba(255,255,255,0) 90%);
- z-index: -1;
- visibility: hidden;
-
-}
-
-/* --- Bottom Right Corner --- */
-.hero-signal__panel::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 250px;
-  height: 250px;
+  width: 320px;
+  height: 320px;
   pointer-events: none;
-
-  /* 
-     1. Bottom border: fades from Right (solid) to Left (transparent)
-     2. Right border: fades from Bottom (solid) to Top (transparent)
-  */
-  background-image: 
-    linear-gradient(to left, #ffffff 0%, #ffffff00 100%),  /* Bottom Line */
-    linear-gradient(to top, #ffffff 0%, #ffffff00 100%);   /* Right Line */
-
-  background-size: 250px 2px, 2px 250px;
-  background-position: bottom right, bottom right;
-  background-repeat: no-repeat;
   z-index: -1;
-   visibility: hidden;
 }
+
+.hero-signal__decoration--top-left {
+ top: -3px;
+  left: -3px;
+  border-top-left-radius: 28px;
+  background: radial-gradient(circle at top left,
+    white 0%,
+    white 25%,
+    transparent 70%);
+}
+
+.hero-signal__decoration--bottom-right {
+   bottom: -3px;
+  right: -3px;
+  border-bottom-right-radius: 28px;
+  background: radial-gradient(circle at bottom right,
+    white 0%,
+    white 25%,
+    transparent 70%);
+}
+
+
 
 .hero-signal__headline {
   display: grid;
@@ -797,7 +787,8 @@ ul {
 .workflow-grid,
 .capabilities-grid {
   display: grid;
-  gap: 1rem;
+  --workflow-gap: 7rem;
+  gap: var(--workflow-gap);
   margin-top: 2.15rem;
 }
 
@@ -866,6 +857,7 @@ ul {
 
 .workflow-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  position: relative;
 }
 
 .workflow-card {
@@ -875,6 +867,49 @@ ul {
   background: linear-gradient(135deg, rgba(95, 130, 255, 0.08), rgba(40, 199, 177, 0.06));
   box-shadow: var(--shadow-sm);
   animation: rise-in 820ms var(--ease-out) both;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* connectors between cards: short lines from each card edge toward the next */
+.workflow-card {
+  position: relative;
+}
+
+.workflow-card:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  /* vertically align with the center of the badge */
+  top: calc(1.55rem + 6em - 2px);
+  left: 100%;
+  width: var(--workflow-gap);
+  height: 4px;
+  background: rgba(255, 255, 255, 0.28);
+  z-index: 0;
+  border-radius: 4px;
+}
+
+.workflow-card:not(:first-child)::before {
+  content: '';
+  position: absolute;
+  top: calc(1.55rem + 6em - 2px);
+  right: 100%;
+  width: var(--workflow-gap);
+  height: 4px;
+  background: rgba(255, 255, 255, 0.28);
+  z-index: 0;
+  border-radius: 4px;
+}
+
+@media (max-width: 1024px) {
+  .workflow-card:not(:last-child)::after,
+  .workflow-card:not(:first-child)::before {
+    display: none;
+  }
 }
 
 .workflow-card:nth-child(2) {
@@ -886,15 +921,16 @@ ul {
 }
 
 .workflow-card__number {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: 3rem;
-  height: 3rem;
-  border-radius: 18px;
+  width: 4.8rem;
+  height: 4.8rem;
+  margin: 0 auto 0.8rem;
+  border-radius: 999px;
   background: linear-gradient(145deg, rgba(95, 130, 255, 0.14), rgba(40, 199, 177, 0.12));
   color: #c6d5ff;
-  font: 800 1rem/1 var(--font-display);
+  font: 800 2.4rem/1 var(--font-display);
 }
 
 .workflow-card ul,
@@ -984,6 +1020,28 @@ ul {
   flex-wrap: wrap;
   gap: 1rem;
   margin-top: 1.4rem;
+}
+
+/* Closing CTA: reduced radius, solid color, hover increases radius + color change */
+.closing__actions .button--primary {
+  box-shadow: none;
+  filter: none;
+  background: #0060DD;
+  color: #fdfefe;
+  border-color: transparent;
+  border-radius: 12px;
+  transform: none;
+  transition: background-color .5s var(--ease-out), border-radius .5s var(--ease-out), color .5s var(--ease-out), filter .5s var(--ease-out);
+}
+
+.closing__actions .button--primary:hover,
+.closing__actions .button--primary:focus-visible {
+  /* darken the same color (not change hue) and remove translate/glow */
+  filter: brightness(0.88);
+  border-radius: 28px;
+  color: #ffffff;
+  transform: none;
+  box-shadow: none;
 }
 
 .closing__text-link {

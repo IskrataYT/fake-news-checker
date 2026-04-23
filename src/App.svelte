@@ -275,6 +275,8 @@
           <div class="hero-signal">
             <div class="hero-signal__glow"></div>
             <div class="hero-signal__panel">
+            <div class="hero-signal__decoration hero-signal__decoration--top-left"></div>
+          <div class="hero-signal__decoration hero-signal__decoration--bottom-right"></div>
               <div class="hero-signal__headline">
                 <p>Статията изисква допълнителна проверка</p>
                 <div class="hero-signal__score">
@@ -328,58 +330,27 @@
 
     <section class="workflow section" id="workflow" aria-labelledby="workflow-heading">
       <div class="section-heading">
-        <p class="section-kicker">Как работи</p>
-        <h2 id="workflow-heading">
-          По-бърз начин да поставите под съмнение слабата информация, без да напускате страницата.
-        </h2>
-        <p>
-          Разширението е подредено според реалния ритъм на четене: открива проблема,
-          сравнява доказателствата и обяснява риска с ясен език.
-        </p>
+        <h2 id="workflow-heading">По-бърз начин да проверите съдържание</h2>
       </div>
 
       <div class="workflow-grid">
-        {#each workflowSteps as step, index}
-          <article class="workflow-card">
-            <div class="workflow-card__number">0{index + 1}</div>
-            <h3>{step.title}</h3>
-            <p>{step.description}</p>
-            <ul>
-              {#each step.bullets as bullet}
-                <li>{bullet}</li>
-              {/each}
-            </ul>
-          </article>
-        {/each}
-      </div>
-    </section>
+        <article class="workflow-card">
+          <div class="workflow-card__number">01</div>
+          <h3>Отворете статия</h3>
+          <p>Прочетете статията, която искате да проверите.</p>
+        </article>
 
-    <section class="capabilities section" id="capabilities" aria-labelledby="capabilities-heading">
-      <div class="section-heading">
-        <p class="section-kicker">Възможности</p>
-        <h2 id="capabilities-heading">
-          Сигнали за читателя, които остават полезни и в най-натоварените новинарски моменти.
-        </h2>
-        <p>
-          Verity Lens се фокусира върху моментите, които действително променят преценката:
-          слаби източници, отклонение в рамкирането, липсващи цитати и кратки обяснения,
-          които се вписват в самата статия.
-        </p>
-      </div>
+        <article class="workflow-card">
+          <div class="workflow-card__number">02</div>
+          <h3>Натисни бутона "Анализирай"</h3>
+          <p>Активирайте анализа с един клик; разширението преглежда ключови източници.</p>
+        </article>
 
-      <div class="capabilities-grid">
-        {#each capabilities as capability}
-          <article class={`capability-card capability-card--${capability.tone}`}>
-            <p class="capability-card__label">{capability.label}</p>
-            <h3>{capability.title}</h3>
-            <p>{capability.description}</p>
-            <ul>
-              {#each capability.bullets as bullet}
-                <li>{bullet}</li>
-              {/each}
-            </ul>
-          </article>
-        {/each}
+        <article class="workflow-card">
+          <div class="workflow-card__number">03</div>
+          <h3>Получете оценка на новината</h3>
+          <p>Виждате кратка оценка и основни сигнали за надеждност.</p>
+        </article>
       </div>
     </section>
 
